@@ -35,10 +35,6 @@ const navItems = document.querySelectorAll('section');
 */
 
 // build the nav
-// for each section do:
-// li = document.createElement('li')
-// li.innerText = "something"
-// navBar.appendChild(li)
 for (let section of navItems) {
   li = document.createElement('li');
   li.innerText = section.dataset.nav;
