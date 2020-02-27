@@ -37,8 +37,11 @@ const navItems = document.querySelectorAll('section');
 // build the nav
 for (let section of navItems) {
   li = document.createElement('li');
-  li.innerText = section.dataset.nav;
-  li.className = "menu__link";
+  section_link = document.createElement('a');
+  section_link.setAttribute("href", '#' + section.id);
+  section_link.innerText = section.dataset.nav;
+  section_link.className = "menu__link";
+  li.appendChild(section_link);
   navBar.appendChild(li);
 }
 
