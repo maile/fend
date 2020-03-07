@@ -26,6 +26,20 @@ const navItems = document.querySelectorAll('section');
  *
 */
 
+function makeActive(entries, observer) {
+  for (let entry of entries) {
+    if (entry.isIntersecting) {
+      // make target element active
+      entry.target.classList.add("active");
+    } else {
+      // make target element not active
+      entry.target.classList.remove("active");
+    }
+  }
+}
+
+// use IntersectionObserver API: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry
+let observer = new IntersectionObserver(makeActive, {threshold: 0.5});
 
 
 /**
@@ -45,6 +59,9 @@ function buildNav() {
     section_link.className = "menu__link";
     li.appendChild(section_link);
     navBar.appendChild(li);
+
+    // good spot to start observing visibility
+    observer.observe(section);
   }
 }
 
@@ -70,4 +87,3 @@ document.onload = buildNav();
 // onclick for menu__link ?
 
 // Set sections as active
-// event??
