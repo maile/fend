@@ -65,10 +65,7 @@ function buildNav() {
   }
 }
 
-// Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
+// callback to smoothly scroll to target element
 function scrollToTarget() {
   target_el = document.querySelector("#" + this.target_id);
   target_el.scrollIntoView({behavior: "smooth"});
@@ -82,8 +79,3 @@ function scrollToTarget() {
 
 // Build menu
 document.onload = buildNav();
-
-// Scroll to section on link click
-// onclick for menu__link ?
-
-// Set sections as active
