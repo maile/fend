@@ -22,14 +22,24 @@ app.get('/weather', getWeather);
 app.post('/weather', postWeather);
 
 function getWeather(req, res) {
-    res.send(projectData);
+    res.send(JSON.stringify(projectData));
 }
 
 function postWeather(req, res) {
     let data = req.body;
-    projectData['temperature'] = data['temperature'];
-    projectData['date'] = data['date'];
-    projectData['mood'] = data['mood'];
+    console.log(data);
+    try {
+        newEntry = {
+            temperature: data['temperature'],
+            date: data['date'],
+            mood: data['mood'],
+        }
+        projectData = newEntry;
+        console.log('added: ' + JSON.stringify(newEntry));
+        res.status(200).send("success");
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 // Setup Server

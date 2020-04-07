@@ -1,50 +1,71 @@
 /* Global Variables */
 let weatherKey = "2fc98d052054a85b926425ad58642b71";
 
-// openweathermap zip example
-// api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={your api key}
-// response:
-//`{
-//`  "coord": {"lon": -122.08,"lat": 37.39},
-//`  "weather": [
-//`    {
-//`      "id": 800,
-//`      "main": "Clear",
-//`      "description": "clear sky",
-//`      "icon": "01d"
-//`    }
-//`  ],
-//`  "base": "stations",
-//`  "main": {
-//`    "temp": 282.55,
-//`    "feels_like": 281.86,
-//`    "temp_min": 280.37,
-//`    "temp_max": 284.26,
-//`    "pressure": 1023,
-//`    "humidity": 100
-//`  },
-//`  "visibility": 16093,
-//`  "wind": {
-//`    "speed": 1.5,
-//`    "deg": 350
-//`  },
-//`  "clouds": {
-//`    "all": 1
-//`  },
-//`  "dt": 1560350645,
-//`  "sys": {
-//`    "type": 1,
-//`    "id": 5122,
-//`    "message": 0.0139,
-//`    "country": "US",
-//`    "sunrise": 1560343627,
-//`    "sunset": 1560396563
-//`  },
-//`  "timezone": -25200,
-//`  "id": 420006353,
-//`  "name": "Mountain View",
-//`  "cod": 200
-//`}
+function getWeatherUrl(zip) {
+    return `http://api.openweathermap.org/data/2.5/weather?zip=${zip},us&units=imperial&appid=${weatherKey}`;
+}
+
+async function getWeather(zip) {
+    const url = getWeatherUrl(zip);
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        alert(error);
+        console.log(error);
+    }
+}
+
+function getTemp(zip) {
+    return getWeather(zip).then((weather) => {
+        return weather.main.temp;
+    }).catch((error) => {
+        console.log("failed to get temperature for zip " + zip);
+    });
+}
+
+document.getElementById('generate').addEventListener('click', generateEntry);
+
+async function postData(url = '', data = {}) {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function updateUI() {
+    const request = await fetch('/weather');
+    try {
+        const data = await request.json();
+        document.getElementById('date').innerHTML = data['date'];
+        document.getElementById('temp').innerHTML = data['temperature'];
+        document.getElementById('content').innerHTML = data['mood'];
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
+    console.log("updating UI...");
+}
+
+async function generateEntry(e) {
+    const zip = document.getElementById("zip").value;
+    const mood = document.getElementById("feelings").value;
+    const temp = await getTemp(zip);
+
+    // Now we have all our data, send it to the server
+    postData('/weather', {temperature: temp, date: newDate, mood: mood})
+    .then(updateUI());
+}
 
 // Create a new date instance dynamically with JS
 let d = new Date();
