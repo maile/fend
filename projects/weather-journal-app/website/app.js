@@ -18,15 +18,13 @@ async function getWeather(zip) {
     }
 }
 
-function getTemp(zip) {
+async function getTemp(zip) {
     return getWeather(zip).then((weather) => {
         return weather.main.temp;
     }).catch((error) => {
         console.log("failed to get temperature for zip " + zip);
     });
 }
-
-document.getElementById('generate').addEventListener('click', generateEntry);
 
 async function postData(url = '', data = {}) {
     try {
@@ -37,15 +35,15 @@ async function postData(url = '', data = {}) {
             },
             body: JSON.stringify(data)
         });
-        return response.json();
+        return response;
     } catch (error) {
         console.log(error);
     }
 }
 
 async function updateUI() {
-    const request = await fetch('/weather');
     try {
+        const request = await fetch('/weather');
         const data = await request.json();
         document.getElementById('date').innerHTML = data['date'];
         document.getElementById('temp').innerHTML = data['temperature'];
@@ -57,13 +55,15 @@ async function updateUI() {
     console.log("updating UI...");
 }
 
+document.getElementById('generate').addEventListener('click', generateEntry);
+
 async function generateEntry(e) {
     const zip = document.getElementById("zip").value;
     const mood = document.getElementById("feelings").value;
-    const temp = await getTemp(zip);
 
+    getTemp(zip)
     // Now we have all our data, send it to the server
-    postData('/weather', {temperature: temp, date: newDate, mood: mood})
+    .then(temp => postData('/weather', {temperature: temp, date: newDate, mood: mood}))
     .then(updateUI());
 }
 
