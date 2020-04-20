@@ -1,4 +1,5 @@
 var aylien = require("aylien_textapi");
+const util = require('util')
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -9,10 +10,8 @@ var textapi = new aylien({
   });
 
 async function getSentiment(text) {
-    resp = await textapi.sentiment({'text': text}, (err, resp) => {
-        // TODO: insert into document
-        return resp;
-    });
+    var sentiment = util.promisify(textapi.sentiment).bind(textapi);
+    return sentiment({'text': text});
 }
 
 exports.getSentiment = getSentiment;
