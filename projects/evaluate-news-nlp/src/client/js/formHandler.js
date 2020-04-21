@@ -11,7 +11,10 @@ function handleSubmit(event) {
     console.log("analysing " + analUrl + "....");
     requestSentiment(analUrl)
     .then(res => res.json())
-    .then(res => console.log(res));
+    .then((res) => {
+        console.log(res);
+        document.getElementById('results').innerHTML = res.polarity;
+    });
 /*
     console.log("::: Form Submitted :::")
     fetch('http://localhost:8081/test')

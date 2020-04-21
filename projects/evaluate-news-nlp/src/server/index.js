@@ -29,8 +29,9 @@ app.post('/sentiment', (req, res) => {
     console.log('handling sentiment request for ', url);
     aylien.getSentiment(url)
     .then((sent) => {
-        res.send(sent.json());
-    })
+        console.log('sending sentiment ', sent);
+        res.send(sent);
+    }).catch(err => console.log(err));
 })
 
 // designates what port the app will listen to for incoming requests
