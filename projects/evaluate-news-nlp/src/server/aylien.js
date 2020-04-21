@@ -10,6 +10,7 @@ var textapi = new aylien({
   });
 
 async function getSentiment(text) {
+    // maybe just do https://github.com/coinbase/coinbase-node/issues/59#issuecomment-354531138
     var sentiment = util.promisify(textapi.sentiment).bind(textapi);
     return sentiment({'text': text});
 }

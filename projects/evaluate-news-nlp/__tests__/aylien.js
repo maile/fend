@@ -1,2 +1,7 @@
 var t = require('../src/server/aylien.js')
-t.getSentiment('poop').then(x => console.log(x));
+
+test('sentiment is positive', () => {
+    return t.getSentiment('yay').then(data => {
+      expect(data.polarity).toBe('positive');
+    });
+  });
