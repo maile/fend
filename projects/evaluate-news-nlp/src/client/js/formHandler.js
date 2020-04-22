@@ -1,4 +1,5 @@
 import { requestSentiment } from "./NLPClient";
+import isURL from 'validator/lib/isURL'
 
 function handleSubmit(event) {
     event.preventDefault()
@@ -6,23 +7,19 @@ function handleSubmit(event) {
     // check what text was put into the form field
     let analUrl = document.getElementById('anal_url').value
 
-    // TODO: check we got a url
+    if (!isURL(analUrl)) {
+        alert('please enter a valid URL!');
+        return false;
+    }
 
     console.log("analysing " + analUrl + "....");
     requestSentiment(analUrl)
     .then(res => res.json())
     .then((res) => {
         console.log(res);
-        document.getElementById('results').innerHTML = res.polarity;
+        let analysis = `The tone of the article is ${res.polarity} with a ${res.subjectivity} view`;
+        document.getElementById('results').innerHTML = analysis;
     });
-/*
-    console.log("::: Form Submitted :::")
-    fetch('http://localhost:8081/test')
-    .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
-    })
-    */
 }
 
 export { handleSubmit }

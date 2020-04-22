@@ -18,4 +18,4 @@ async function requestSentiment(url) {
     return postData('/sentiment', { 'url': url}).catch(err => console.log('failed to request sentiment'));
 }
 
-export { requestSentiment }
+export { requestSentiment, postData }

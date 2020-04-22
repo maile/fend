@@ -1,3 +1,23 @@
+# NLP processor
+
+This project leverages the [aylien API](https://aylien.com/text-api/sdks/) to return sentiment about a given text or URL.
+
+Several tests are included. To run them use the 'npm run test' command.
+
+To run the project first build it and open in a browser:
+
+  npm run build-dev
+
+Then start the server:
+
+  npm run start
+
+To build the files for deploying just do:
+
+  npm run build-prod
+
+And they'll show up in dist/
+
 # Project Instructions
 
 This repo is your starter code for the project. It is the same as the starter code we began with in lesson 2. Install and configure Webpack just as we did in the course. Feel free to refer to the course repo as you build this one, and remember to make frequent commits and to create and merge branches as necessary!
