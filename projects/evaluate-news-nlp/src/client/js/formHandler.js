@@ -17,7 +17,7 @@ function handleSubmit(event) {
     .then(res => res.json())
     .then((res) => {
         console.log(res);
-        let analysis = `The tone of the article is ${res.polarity} with a ${res.subjectivity} view`;
+        let analysis = `The tone of <p>${res.text}</p> is ${res.polarity} with a ${res.subjectivity} view`;
         document.getElementById('results').innerHTML = analysis;
     });
 }
