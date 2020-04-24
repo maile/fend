@@ -1,5 +1,14 @@
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
+const dotenv = require('dotenv');
+dotenv.config();
+
+const Geonames = require('geonames.js')
+const geonames = new Geonames({
+    username: process.env.GEONAME_USER,
+    lan: 'en',
+    encoding: 'JSON'
+  });
 
 // Require Express to run server and routes
 let express = require('express');
