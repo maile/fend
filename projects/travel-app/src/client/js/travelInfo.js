@@ -28,6 +28,10 @@ async function destWeather(dest, date) {
     console.log(`requesting info for ${dest} on ${date}`);
     return postData('/weather', { 'dest': dest, 'date': date})
     .then(x => x.json())
+    .then(x => {
+        x.until = daysUntil(date);
+        return x;
+    })
     .catch(err => console.log('failed to request weather'));
 }
 

@@ -11,6 +11,7 @@ function handleSubmit(event) {
     .then(x => {
         console.log(`for "${dest}" we got:`);
         console.log(x);
+        document.getElementById('countdown').innerHTML = `your trip is ${x.until} days away!`;
         document.getElementById('weather').innerHTML = x.weather;
     })
 }
