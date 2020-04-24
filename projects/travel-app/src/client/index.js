@@ -1,5 +1,4 @@
 import { handleSubmit } from './js/formHandler'
-
 import './styles/resets.scss'
 
 // set up hooks into index.html

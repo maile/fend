@@ -1,14 +1,6 @@
+const geonames = require('./geonames.js');
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
-const dotenv = require('dotenv');
-dotenv.config();
-
-const Geonames = require('geonames.js')
-const geonames = new Geonames({
-    username: process.env.GEONAME_USER,
-    lan: 'en',
-    encoding: 'JSON'
-  });
 
 // Require Express to run server and routes
 let express = require('express');
@@ -28,25 +20,20 @@ app.use(cors());
 app.use(express.static('dist'));
 
 // set up routes
-app.get('/weather', getWeather);
-app.post('/weather', postWeather);
+app.post('/weather', destWeather);
 
 function getWeather(req, res) {
     res.send(JSON.stringify(projectData));
 }
 
-function postWeather(req, res) {
+function destWeather(req, res) {
     let data = req.body;
     console.log(data);
     try {
-        newEntry = {
-            temperature: data['temperature'],
-            date: data['date'],
-            mood: data['mood'],
-        }
-        projectData = newEntry;
-        console.log('added: ' + JSON.stringify(newEntry));
-        res.status(200).send("success");
+        let countryInfo = geonames.search(data.dest);
+        let date = data.date;
+        console.log(`calculating weather on ${date} at ${data.dest}`);
+        res.send(JSON.stringify({weather: "fine"}));
     } catch (error) {
         console.log(error);
     }
