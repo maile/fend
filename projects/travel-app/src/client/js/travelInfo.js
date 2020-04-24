@@ -13,6 +13,17 @@ async function postData(url = '', data = {}) {
     }
 }
 
+function daysUntil(date)
+{
+    let today = new Date(Date.now());
+    let then = new Date(date);
+    let miliSecondsUntil = then.getTime() - today.getTime();
+    let secondsUntil = Math.floor(miliSecondsUntil / 1000);
+    let minutesUntil = Math.floor(secondsUntil / 60);
+    let hoursUntil = Math.floor(minutesUntil / 60);
+    let daysUntil = Math.floor(hoursUntil / 24);
+    return daysUntil;
+}
 async function destWeather(dest, date) {
     console.log(`requesting info for ${dest} on ${date}`);
     return postData('/weather', { 'dest': dest, 'date': date})
@@ -20,4 +31,4 @@ async function destWeather(dest, date) {
     .catch(err => console.log('failed to request weather'));
 }
 
-export { destWeather, postData };
+export { destWeather, postData, daysUntil };
