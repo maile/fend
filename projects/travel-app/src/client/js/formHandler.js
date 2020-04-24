@@ -3,12 +3,11 @@ import { destWeather } from './travelInfo'
 function handleSubmit(event) {
     event.preventDefault()
 
-    // check what text was put into the form field
+    // first grab the weather
     let dest = document.getElementById('travel_dest').value
+    let date = document.getElementById('travel_date').value
 
-    console.log(dest);
-
-    destWeather(dest)
+    destWeather(dest, date)
     .then(x => {
         console.log(`for "${dest}" we got:`);
         console.log(x);

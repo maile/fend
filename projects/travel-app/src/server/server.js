@@ -22,17 +22,15 @@ app.use(express.static('dist'));
 // set up routes
 app.post('/weather', destWeather);
 
-function getWeather(req, res) {
-    res.send(JSON.stringify(projectData));
-}
-
 function destWeather(req, res) {
     let data = req.body;
     console.log(data);
     try {
         let countryInfo = geonames.search(data.dest);
+        let long = countryInfo.lng;
+        let lat = countryInfo.lat;
         let date = data.date;
-        console.log(`calculating weather on ${date} at ${data.dest}`);
+        console.log(`calculating weather on ${date} at ${long} ${lat}`);
         res.send(JSON.stringify({weather: "fine"}));
     } catch (error) {
         console.log(error);
