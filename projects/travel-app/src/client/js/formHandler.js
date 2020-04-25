@@ -13,6 +13,8 @@ function handleSubmit(event) {
         console.log(x);
         document.getElementById('countdown').innerHTML = `your trip is ${x.until} days away!`;
         document.getElementById('weather').innerHTML = `high of ${x.weather.high} low of ${x.weather.low} otherwise ${x.weather.desc}`;
+        document.getElementById('dest_img').innerHTML = `<img src="${x.img}">`;
+
     })
 }
 

@@ -1,5 +1,6 @@
 const geonames = require('./geonames.js');
 const weatherbit = require('./weatherbit.js');
+const pixabay = require('./pixabay.js');
 
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
@@ -37,7 +38,11 @@ function destWeather(req, res) {
             weatherbit.getForecast(date, lat, long)
             .then(forecast => {
                 console.log(forecast);
-                res.send(JSON.stringify({weather: forecast}));
+                // now we have the forecast, grab an image
+                pixabay.findImage(data.dest)
+                .then(imgURL => {
+                    res.send(JSON.stringify({weather: forecast, img: imgURL}));
+                }) .catch(err => console.log(err))
             })
         })
     } catch (error) {
