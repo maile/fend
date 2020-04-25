@@ -1,4 +1,6 @@
 const geonames = require('./geonames.js');
+const weatherbit = require('./weatherbit.js');
+
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
 
@@ -26,12 +28,18 @@ function destWeather(req, res) {
     let data = req.body;
     console.log(data);
     try {
-        let countryInfo = geonames.search(data.dest);
-        let long = countryInfo.lng;
-        let lat = countryInfo.lat;
-        let date = data.date;
-        console.log(`calculating weather on ${date} at ${long} ${lat}`);
-        res.send(JSON.stringify({weather: "fine"}));
+        geonames.search(data.dest)
+        .then(countryInfo => {
+            let long = countryInfo.lng;
+            let lat = countryInfo.lat;
+            let date = data.date;
+            console.log(`calculating weather on ${date} at ${long} ${lat}`);
+            weatherbit.getForecast(date, lat, long)
+            .then(forecast => {
+                console.log(forecast);
+                res.send(JSON.stringify({weather: forecast}));
+            })
+        })
     } catch (error) {
         console.log(error);
     }

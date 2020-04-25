@@ -12,7 +12,7 @@ function handleSubmit(event) {
         console.log(`for "${dest}" we got:`);
         console.log(x);
         document.getElementById('countdown').innerHTML = `your trip is ${x.until} days away!`;
-        document.getElementById('weather').innerHTML = x.weather;
+        document.getElementById('weather').innerHTML = `high of ${x.weather.high} low of ${x.weather.low} otherwise ${x.weather.desc}`;
     })
 }
 
