@@ -1,10 +1,30 @@
-# Weather-Journal App Project
+# Travel Planner app
 
-## Overview
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
+This app implements a simple travel planner which takes as input a travel destination and a start and end date. It returns the trip duration and expected weather.
 
-## Instructions
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
+Run the app with 
 
-## Extras
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+    npm run build-prod
+    npm run start
+    
+## APIs
+
+The implemented server proxies several 3rd party APIs through 2 APIs:
+
+### /weather
+
+Request weather for destination at date.
+Request: { dest: <destination>, date: <ISO date string> }
+Response: { weather: { high: <high temperature>, low: <low temperature>, desc: <weather description> }}
+
+### /image
+
+Request image URL for destination.
+Request: { dest: <destination> }
+Response: { img: <image URL> }
+
+## tests
+
+run the tests with:
+
+    npm run test
