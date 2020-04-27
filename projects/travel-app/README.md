@@ -6,7 +6,11 @@ Run the app with
 
     npm run build-prod
     npm run start
-    
+
+## Standing Out
+
+This project implements calculating the trip duration as a way of standing out.
+
 ## APIs
 
 The implemented server proxies several 3rd party APIs through 2 APIs:
