@@ -29,6 +29,7 @@ function daysUntil(date)
     return dateDiff(today, then);
 }
 
+// pull destination weather information from /weather API
 async function destWeather(dest, date) {
     console.log(`requesting info for ${dest} on ${date}`);
     return postData('/weather', { 'dest': dest, 'date': date})
@@ -40,6 +41,7 @@ async function destWeather(dest, date) {
     .catch(err => console.log('failed to request weather'));
 }
 
+// pull destination image URL from /image API
 async function destImage(dest) {
     console.log(`requesting image for ${dest}`);
     return postData('/image', { 'dest': dest })
