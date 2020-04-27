@@ -11,8 +11,8 @@ function handleSubmit(event) {
     .then(x => {
         console.log(`for "${dest}" we got:`);
         console.log(x);
-        document.getElementById('countdown').innerHTML = `your trip is ${x.until} days away!`;
-        document.getElementById('weather').innerHTML = `high of ${x.weather.high} low of ${x.weather.low} otherwise ${x.weather.desc}`;
+        document.getElementById('countdown').innerHTML = `Your trip is ${x.until} days away!`;
+        document.getElementById('weather').innerHTML = `On your arrival date, the weather will be: <br> High of ${x.weather.high} <br> Low of ${x.weather.low} <br> Otherwise ${x.weather.desc}`;
         document.getElementById('dest_img').innerHTML = `<img src="${x.img}">`;
 
     })

@@ -2,46 +2,48 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Test</title>
+        <title>Project 7 Test</title>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     </head>
 
     <body>
+      <div class="container">
+          <header class="box">
+              <div class="box" id="title">
+                  <h1>Travel Planner</h1>
+              </div>
+              <div class="box" id="nav">
+                  <h2>My Trips</h2>
+              </div>
+          </header>
 
-        <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
-            </div>
-        </header>
+          <section class="box" id="image">
+                  <div class="box" id="dest_img">BOO!!</div>
+              </section>
 
-        <main>
-            <section>
-                <form>
-                    <input id="travel_dest" value="" placeholder="travel destination?">
-                    <input id="travel_submit" type="submit" name value="go!">
-                </form>
-            <section>
+          <section class="box" id="info">
+                  <div class="box" id="date">
+                      <label for="start">Start date:</label>
+                      <input type="date" id="travel_date" name="trip-start">
+                  </div>
 
-            <section>
-                <label for="start">Start date:</label>
-                <input type="date" id="travel_date" name="trip-start">
-             </section>
-                
+                  <div class="box" id = dest>
+                      <form>
+                          <input id="travel_dest" value="" placeholder="Travel Destination?">
+                          <input id="travel_submit" type="submit" name value="GO!">
+                      </form>
+                  </div>
 
-            <section>
-                <div id="countdown"></div>
-                <strong>Forecast:</strong>
-                <div id="weather"></div>
-                <div id="dest_img"></div>
-            </section>
-        </main>
+                  <div class="box">
+                      <div id="countdown"></div>
+                      <div id="weather"></div>
+                  </div>
+              </section>
 
-        <footer>
+          <footer class="box">
             <p>This is a footer</p>
-        </footer>
-        <script>
+          </footer>
+      <script>
             // Check that service workers are supported
             if ('serviceWorker' in navigator) {
                 // Use the window load event to keep the page load performant
