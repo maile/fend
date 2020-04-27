@@ -24,6 +24,8 @@ app.use(express.static('dist'));
 
 // set up routes
 app.post('/weather', destWeather);
+app.post('/image', destImage);
+
 
 function destWeather(req, res) {
     let data = req.body;
@@ -38,11 +40,7 @@ function destWeather(req, res) {
             weatherbit.getForecast(date, lat, long)
             .then(forecast => {
                 console.log(forecast);
-                // now we have the forecast, grab an image
-                pixabay.findImage(data.dest)
-                .then(imgURL => {
-                    res.send(JSON.stringify({weather: forecast, img: imgURL}));
-                }) .catch(err => console.log(err))
+                res.send(JSON.stringify({weather: forecast}));
             })
         })
     } catch (error) {
@@ -50,6 +48,18 @@ function destWeather(req, res) {
     }
 }
 
+function destImage(req, res) {
+    let data = req.body;
+
+    try {
+        pixabay.findImage(data.dest)
+        .then(imgURL => {
+            res.send(JSON.stringify({img: imgURL}));
+        }) .catch(err => console.log(err))
+    } catch (error) {
+        console.log(error);
+    }
+}
 // Setup Server
 app.listen(3000, (req, res) => {
   console.log('server running on port 3000!');

@@ -35,4 +35,13 @@ async function destWeather(dest, date) {
     .catch(err => console.log('failed to request weather'));
 }
 
-export { destWeather, postData, daysUntil };
+async function destImage(dest) {
+    console.log(`requesting image for ${dest}`);
+    return postData('/image', { 'dest': dest })
+    .then(x => x.json())
+    .then(x => {
+        return x;
+    })
+    .catch(err => console.log('failed to request image'));
+}
+export { destWeather, destImage, postData, daysUntil };
